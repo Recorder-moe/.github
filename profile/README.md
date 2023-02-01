@@ -13,13 +13,13 @@ Recorder.moe 是一個直播錄影服務專案，主要錄影內容為 Vtuber �
 
 本專案設計是以 Azure 服務為中心架構
 
-- 使用 Azure Static Web App 作為前端網站
+- 使用 Azure Static Web App 託管 Angular 前端網站
 - 使用 Azure Functions 作為後端 API
 - 使用 Azure Container Instance 作為錄影容器
-- 使用 Azure Blob Storage 儲存錄影檔案
-- 使用 Azure Cosmos DB 儲存資料庫
-- 使用 Azure Devops 作專案管理
-- 使用 Azure Pipeline 作 CI/CD
+- 使用 Azure Blob Storage 儲存、提供錄影檔案
+- 使用 Azure Cosmos DB 作為資料庫
+- 使用 Azure Devops 執行專案管理
+- 使用 Azure Pipeline 建立 CI/CD
 - *唯監控 Service、Seq log server 是託管在 DigitalOcean Droplet*
 
 網站上的 FAQ 頁面未實作，規則設計如下:
