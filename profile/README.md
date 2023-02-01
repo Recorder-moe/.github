@@ -6,6 +6,9 @@ Recorder.moe 是一個直播錄影服務專案，主要錄影內容為 Vtuber �
 **本專案目前處於開發階段，_不接受委託和贊助_**，許多功能未完成實作，無SLA保證，請在了解以上前提後試用。\
 測試階段預覧網址: <https://alpha.recorder.moe/>
 
+由於 template licence 的合約限制，本專案前端程式碼閉源。\
+其餘程式碼部份開源。
+
 本專案設計是以 Azure 服務為中心架構
 
 - 使用 Azure Static Web App 作為前端網站
