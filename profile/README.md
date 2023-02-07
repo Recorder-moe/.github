@@ -3,10 +3,8 @@
 Recorder.moe 是一個直播錄影服務專案，主要錄影內容為 Vtuber 直播影片。\
 本專案是以「錄影服務」為中心，在接受用戶的委託後對指定的頻道錄影，讓用戶不會錯過直播內容。
 
-請加入Discord伺服器以了解更多: <https://discord.gg/2M689Aaq4b>
-
-**本專案目前處於開發階段，_不接受委託和贊助_**，許多功能未完成實作，無SLA保證，請在了解以上前提後試用。\
-測試階段預覧網址: <https://alpha.recorder.moe/>
+**本專案目前在 Discord 內進行 alpha 測試。**
+請加入 Discord 伺服器以了解更多: <https://discord.gg/2M689Aaq4b>
 
 由於 template 的 licence 限制，本專案前端程式碼閉源。\
 其餘程式碼開源，但是保留所有權利。
