@@ -1,5 +1,7 @@
 # Recorder.moe
 
+<img src="../page.png" width="60%"/>
+
 Recorder.moe 是一個直播錄影服務專案，主要錄影內容為 Vtuber 直播影片。\
 本專案是以「錄影服務」為中心，在接受用戶的委託後對指定的頻道錄影，讓用戶不會錯過直播內容。
 
