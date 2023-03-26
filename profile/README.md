@@ -2,9 +2,13 @@
 
 <img src="https://github.com/Recorder-moe/.github/raw/master/page.png" width="60%"/>
 
+**Recorder.moe** 錄影服務接受用戶的委託，為您錄製 **Vtuber** 直播。\
+幫您紀錄下每一次直播內容，不漏失任何一個精彩時刻！
+
+**Recorder.moe** records your favorite **Vtuber** live streams.\
+Capturing every exciting moment so you never miss a beat!
+
 ## 中文
-Recorder.moe 是一個直播錄影服務專案，主要錄影內容為 Vtuber 直播影片。\
-本專案是以「錄影服務」為中心，在接受用戶的委託後對指定的頻道錄影，讓用戶不會錯過直播內容。
 
 詳細專案說明請見 [FAQ頁面](https://alpha.recorder.moe/pages/faq)
 
@@ -19,8 +23,6 @@ Recorder.moe 是一個直播錄影服務專案，主要錄影內容為 Vtuber �
 > 建議改用[其它的開源方案](https://blog.maki0419.com/2020/11/docker-youtube-dl-auto-recording-live-dl.html)。
 
 ## English
-Recorder.moe is a live recording service project, mainly recording Vtuber live videos.\
-This project focuses on "recording services", accepting user commissions to record designated channels, so that users will not miss the live content.
 
 For detailed project description, please see [FAQ page](https://alpha.recorder.moe/pages/faq)
 
