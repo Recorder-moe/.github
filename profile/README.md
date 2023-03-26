@@ -7,7 +7,7 @@
 
 **Recorder.moe** records your favorite **Vtuber** live streams.\
 Capturing every exciting moment so you never miss a beat!\
-(The English readme file is in the second half.)
+[The English readme](#english-readme)
 
 詳細專案說明請見 [FAQ頁面](https://alpha.recorder.moe/pages/faq)
 
@@ -49,19 +49,19 @@ Capturing every exciting moment so you never miss a beat!\
 
 【Angular 14】 本專案的前端 Angular 網頁。Template 購自 themeforest，依照 envatomarket Regular License 使用。由於 template 的 licence 限制，本專案程式碼閉源。
 
-### LivestreamRecorderBackend
+### [LivestreamRecorderBackend](https://github.com/Recorder-moe/LivestreamRecorderBackend)
 
 【.NET 6 Azure Functions】 本專案的網頁後端 API。 使用 Azure Functions 降低後端成本，搭配 Azure App Service 內建的 EasyAuth 做 OAuth2.0 身份驗證，執行需驗證的資料庫交易。
 
-### LivestreamRecorderService
+### [LivestreamRecorderService](https://github.com/Recorder-moe/LivestreamRecorderService)
 
 【.NET 7 Worker Service in Docker】 本專案的監控 Worker Service。監控所有的頻道，並在直播時動態建立 Azure Container Instance 啟動錄影。介接 Azure Cosmos DB，負責管理頻道、影片的資料和狀態。
 
-### AzureFileShares2BlobContainers
+### [AzureFileShares2BlobContainers](https://github.com/Recorder-moe/AzureFileShares2BlobContainers)
 
 【.NET 6 Azure Functions】 負責把錄完的影片檔案由 Azure Files 傳輸至 Azure Blob Storage。 這是一支 Azure Function，由 LivestreamRecorderService 呼叫。 它和本專案的 Azure Storage 部署在同一個 Azure 區域，讓檔案在同區域內傳輸，不被收取額外的對外頻寬傳輸費用。
 
-### OpenGraphTagBuilder
+### [OpenGraphTagBuilder](https://github.com/Recorder-moe/OpenGraphTagBuilder)
 
 【Cloudflare Worker】 依網址查詢 Azure Cosmos DB 的資料，並動態的調整 html open graph meta tag，提供外部預覧和 search engine crawler 使用。
 
@@ -111,19 +111,19 @@ This project is designed with Azure services as the central architecture, combin
 
 【Angular 14】 The frontend Angular web page of this project. Template purchased from themeforest and used under envatomarket Regular License. Due to license restrictions of the template used, the code of this project is closed source.
 
-### LivestreamRecorderBackend
+### [LivestreamRecorderBackend](https://github.com/Recorder-moe/LivestreamRecorderBackend)
 
 【.NET 6 Azure Functions】 The backend API of this project's web page. Uses Azure Functions to reduce backend costs and Azure App Service's built-in EasyAuth for OAuth2.0 identity verification to execute authenticated database transactions.
 
-### LivestreamRecorderService
+### [LivestreamRecorderService](https://github.com/Recorder-moe/LivestreamRecorderService)
 
 【.NET 7 Worker Service in Docker】 The monitoring worker service of this project. Monitors all channels and dynamically creates Azure Container Instances for recording during live streaming. Interfaces with Azure Cosmos DB to manage channel, video data and status.
 
-### AzureFileShares2BlobContainers
+### [AzureFileShares2BlobContainers](https://github.com/Recorder-moe/AzureFileShares2BlobContainers)
 
 【.NET 6 Azure Functions】 Responsible for transferring recorded video files from Azure Files to Azure Blob Storage. This is an Azure Function be called by LivestreamRecorderService. This function and the Azure Storage of this project are deployed in the same Azure region, allowing files to be transmitted within the same region without incurring additional external bandwidth transfer costs.
 
-### OpenGraphTagBuilder
+### [OpenGraphTagBuilder](https://github.com/Recorder-moe/OpenGraphTagBuilder)
 
 【Cloudflare Worker】 Queries data from Azure Cosmos DB according to the URL and dynamically build html open graph meta tags to provide external preview and search engine crawler usage.
 
