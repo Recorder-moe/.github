@@ -14,7 +14,7 @@
   <b>👉 <a href="https://beta.recorder.moe/" target="_blank">https://beta.recorder.moe</a></b>
 </p>
 
-詳細專案說明請見 [FAQ頁面](https://beta.recorder.moe/pages/faq)
+詳細專案說明請見 [FAQ頁面](https://beta.recorder.moe/pages/faq)\
 請加入 Discord 伺服器以了解更多: <https://discord.gg/2M689Aaq4b>
 
 > **Note**\

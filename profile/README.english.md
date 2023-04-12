@@ -14,7 +14,7 @@
   <b>👉 <a href="https://beta.recorder.moe/" target="_blank">https://beta.recorder.moe</a></b>
 </p>
 
-For detailed project description, please see [FAQ page](https://beta.recorder.moe/pages/faq)
+For detailed project description, please see [FAQ page](https://beta.recorder.moe/pages/faq)\
 Please join the Discord server for more information: <https://discord.gg/2M689Aaq4b>
 
 > **Note**\
