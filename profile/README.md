@@ -9,118 +9,47 @@
   <a href="https://github.com/Recorder-moe/.github/blob/master/profile/README.english.md">English</a>
 </p>
 <p align="center">
-  <b>Recorder.moe</b> 錄影服務接受用戶的委託，為您錄製 <b>Vtuber</b> 直播。<br>
-  幫您紀錄下每一次直播內容，不漏失任何一個精彩時刻！<br>
-  <b>👉 <a href="https://beta.recorder.moe/" target="_blank">https://beta.recorder.moe</a></b>
+  <b>Recorder.moe</b> 是一個進階的開源自動化錄影系統。
 </p>
 
-詳細專案說明請見 [FAQ頁面](https://beta.recorder.moe/pages/faq)\
-請加入 Discord 伺服器以了解更多: <https://discord.gg/2M689Aaq4b>
+> **Warning**
+> Recorder.moe 曾經是面向一般使用者的「錄影服務」平台，自 2023/5/14 後轉型為供個人使用的開源錄影解決方案。
+> 專案目前尚未完成轉型，一部份設計可能和此文件不相同。
+> 若是有疑問，請至 Discord 伺服器詢問。 <https://discord.gg/2M689Aaq4b>
 
-> **Note**\
-> 此專案難以部署，並不推薦任何人自行架設。\
-> 建議改用[其它的開源方案](https://blog.maki0419.com/2020/11/docker-youtube-dl-auto-recording-live-dl.html)。
+## 系統架構
 
-## 專案的基礎架構介紹
+本系統分為以下幾個大架構
 
-```mermaid
-graph TD
-subgraph Database
-E[Azure Cosmos DB]
-end
+|              | 架構                                              | 說明                                  |
+|--------------|---------------------------------------------------|-------------------------------------|
+| 網頁前端     | Angular 14                                        | 靜態網頁，可以放在任何網頁伺服器上     |
+| 網頁後端     | .NET 6 Azure Functions                            | 網頁的 API，執行需要驗證身份的網頁操作 |
+| 資料庫       | Azure Cosmos DB                                   | 保存頻道、影片、使用者資料              |
+| 儲存體       | Azure Blob Storage / Amazon S3-Compatible Storage | 存放圖片實體檔案、影片實體檔案         |
+| 監控服務     | .NET 7 Worker Service                             | 管理及監控頻道、影片的狀態，啟動錄影    |
+| 錄影容器平台 | Azure Container Instance / Kubernetes             | 執行錄影容器的平台，由監控服務自動部署 |
 
-subgraph Discord
-X(Customer Service)
-Y(Webhook Notifier)
-end
-subgraph DigitalOcean Droplet
-U[Service Worker]
-W[Seq Log Server]
-end
+## 基礎設施
 
-subgraph Azure Static Web Apps
-A[Frontend Angular SPA]
-end
+|              | 推薦的基礎設施           | 省錢的基礎設施                                  |
+|--------------|--------------------------|-------------------------------------------------|
+| 網頁前端     | Azure Static Web Apps    | Azure Static Web Apps *                         |
+| 網頁後端     | Azure Functions          | Azure Functions **                              |
+| 資料庫       | Azure Cosmos DB          | Azure Cosmos DB ***                             |
+| 儲存體       | Azure Blob Storage       | DigitalOcean Droplet -> Kubernetes -> MinIO     |
+| 監控服務     | Azure Container Instance | DigitalOcean Droplet -> Kubernetes -> Container |
+| 錄影容器平台 | Azure Container Instance | DigitalOcean Droplet -> Kubernetes              |
 
-subgraph Azure Compute
-subgraph Azure Container Instances
-G[Docker Container]
-end
+\* Azure Static Web Apps 的免費方案每月有 100 GB 的傳輸量，免費 SSL 憑證，可自訂網域。\
+<https://azure.microsoft.com/zh-tw/pricing/details/app-service/static/>
+\*\* Azure Functions 免費授權每個月一百萬次請求，400000 GB-s 執行時間，本專案使用量不可能超過此額度。\
+<https://azure.microsoft.com/zh-tw/pricing/details/functions/>
+\*\*\* Azure Cosmos DB 免費層包含 1000 RU/s，大約在監控 6 個頻道時不會超過，多餘部份按照用量計價。\
+<https://learn.microsoft.com/zh-tw/azure/cosmos-db/free-tier>
 
-subgraph Azure Functions
-K[AzureFileShares2BlobContainers]
-
-C[Backend] 
-end
-end
-
-subgraph Container Registry
-T(Docker Hub)
-S(GitHub Container Registry)
-end
-
-subgraph Azure Storage
-J(Azure File Share)
-L(Azure Blob Storage) 
-end
-
-subgraph Cloudflare
-subgraph Cloudflare Worker
-R[OpenGraphTagBuilder]
-end
-B(DNS)
-O(CDN/Cache)
-end
-
-C -->|Managed private data| E
-
-O-->A
-B-->A
-
-U-->|Managed Channel/Video data|E
-
-A-->|Query public data|E
-R-->|Query public data|E
-
-U-->|Deploy|G
-T -->|As Fallback|G
-S -->G
-J --> K-->L
-
-G --> |Recording video files to|J
-L-->|Recordings archives|A 
-L-->|Channel/Video Pictures|A
-A--->|Backend API for private data|C
-C-->|Generate Video Blob SASToken|A
-
-U-->|Logging|W
-
-U-->|Video Status Notifier|Y
-W-->|Error|Y
-```
-
-本專案設計是以 Azure 服務為中心架構，以低成本且高 SLA 的服務搭配，以達到高可用性、高可擴展性的目的。
-
-* Azure
-  * 使用 Azure Static Web App 託管 Angular 前端網站
-  * 使用 Azure Functions 作為後端 API
-  * 使用 Azure Container Instance 動態部署錄影容器
-  * 使用 Azure Blob Storage 儲存、提供錄影檔案
-  * 使用 Azure Cosmos DB 作為資料庫
-  * 使用 Azure Pipeline 建立 CI/CD
-  * 使用 Azure DevOps 執行專案管理
-* DigitalOcean
-  * 在 DigitalOcean Droplet 上託管一台 Linux VM，運行監控 Worker Service & Seq log server
-* GitHub
-  * 在 GitHub 上開源專案
-  * 使用 GitHub Container Registry 儲存 Docker Image
-  * 使用 GitHub Actions 建立 CI/CD
-* Cloudflare
-  * 在 Cloudflare 上託管 DNS
-  * 使用 Cloudflare Workers 建立網站的 Open Graph 預覧
-  * 使用 Cloudflare 提供網頁 caching
-* Docker Hub
-  * 使用 Docker Hub 做為備援的 Container Registry
+> **Note**
+> 若不考慮可用性和水平擴展性，**最簡單**的基礎設施是在單一台主機上，用一個 Kubernetes 設定檔搞定除了資料庫以外的所有服務。
 
 ## 各個子專案
 
@@ -143,7 +72,3 @@ W-->|Error|Y
 ### [OpenGraphTagBuilder](https://github.com/Recorder-moe/OpenGraphTagBuilder)
 
 【Cloudflare Worker】 依網址查詢 Azure Cosmos DB 的資料，並動態的調整 html open graph meta tag，提供外部預覧和 search engine crawler 使用。
-
-## 專案的程式碼授權方式
-
-本專案的所有程式碼財產皆保留所有權利，不得任意販售、使用、修改、再發佈。
