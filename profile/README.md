@@ -12,9 +12,9 @@
   <b>Recorder.moe</b> 是一個進階的開源自動化錄影系統。
 </p>
 
-> **Warning**
-> Recorder.moe 曾經是面向一般使用者的「錄影服務」平台，自 2023/5/14 後轉型為供個人使用的開源錄影解決方案。
-> 專案目前尚未完成轉型，一部份設計可能和此文件不相同。
+> **Warning**\
+> Recorder.moe 曾經是面向一般使用者的「錄影服務」平台，自 2023/5/14 後轉型為供個人使用的開源錄影解決方案。\
+> 專案目前尚未完成轉型，一部份設計可能和此文件不相同。\
 > 若是有疑問，請至 Discord 伺服器詢問。 <https://discord.gg/2M689Aaq4b>
 
 ## 系統架構
@@ -42,13 +42,13 @@
 | 錄影容器平台 | Azure Container Instance | DigitalOcean Droplet -> Kubernetes              |
 
 \* Azure Static Web Apps 的免費方案每月有 100 GB 的傳輸量，免費 SSL 憑證，可自訂網域。\
-<https://azure.microsoft.com/zh-tw/pricing/details/app-service/static/>
+<https://azure.microsoft.com/zh-tw/pricing/details/app-service/static/>\
 \*\* Azure Functions 免費授權每個月一百萬次請求，400000 GB-s 執行時間，本專案使用量不可能超過此額度。\
-<https://azure.microsoft.com/zh-tw/pricing/details/functions/>
+<https://azure.microsoft.com/zh-tw/pricing/details/functions/>\
 \*\*\* Azure Cosmos DB 免費層包含 1000 RU/s，大約在監控 6 個頻道時不會超過，多餘部份按照用量計價。\
 <https://learn.microsoft.com/zh-tw/azure/cosmos-db/free-tier>
 
-> **Note**
+> **Note**\
 > 若不考慮可用性和水平擴展性，**最簡單**的基礎設施是在單一台主機上，用一個 Kubernetes 設定檔搞定除了資料庫以外的所有服務。
 
 ## 各個子專案
