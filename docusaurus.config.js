@@ -20,7 +20,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'Recorder-moe', // Usually your GitHub org/user name.
-  projectName: 'doc', // Usually your repo name.
+  projectName: '.github', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -31,6 +31,10 @@ const config = {
   i18n: {
     defaultLocale: 'zh-Hant',
     locales: ['zh-Hant'],
+  },
+
+  markdown: {
+    mermaid: true,
   },
 
   presets: [
@@ -50,10 +54,18 @@ const config = {
     ],
   ],
 
+  themes: ['@docusaurus/theme-mermaid'],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      metadata: [{name: 'keywords', content: 'Recorder.moe, recorder, recording, youtube-downloader, youtube-dl, yt-dlp, youtube, twitcasting, twitch, fc2'}],
+      metadata: [
+        {
+          name: 'keywords',
+          content:
+            'Recorder.moe, recorder, recording, youtube-downloader, youtube-dl, yt-dlp, youtube, twitcasting, twitch, fc2',
+        },
+      ],
       image: 'img/preview.webp',
       navbar: {
         title: 'Recorder.moe Docs',

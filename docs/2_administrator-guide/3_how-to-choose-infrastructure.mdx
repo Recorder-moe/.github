@@ -1,0 +1,60 @@
+---
+id: how-to-choose-infrastructure
+title: 如何選擇基礎設施?
+date: 2023-08-22T14:58:53.948Z
+draft: false
+---
+
+首先，你需要先決定你希望系統在哪裡運行。您可以選擇在 Azure 雲端或在 Kubernetes 部署。
+
+我們選擇微軟 Azure 雲端服務做為雲端基礎架構的服務提供商，因為它提供高度彈性的雲端運算服務和平台即服務，可以有效降低維運成本。此外，Azure 提供了高度可用性，可靠性和安全性，這是地端部署時無法提供的。例如說我們的網頁後端使用 Azure Functions，其免費授權每個月一百萬次請求，400000 GB-s 執行時間，基本上你不用為網頁後端的運算成本擔心。我們的錄影容器動態部署在 Azure Container Instance，不管同時錄製多少個頻道都沒問題。資料庫選用 Azure Cosmos DB，在世界各地都具有即時且無限的彈性、可以快速讀取和寫入資料，特別的是它可以直接從網頁前端訪問資料庫，而不需要經過網頁後端，這大大的降低了網頁讀取延遲和後端維運成本。
+
+雲端部署能帶來非常多的好處，但其缺點也很明顯，要錢 😉。我們在設計雲端架構時已經盡可能的壓低了成本，但即使如此，還是會在容器個體和物件儲存體上花費不少成本。這兩樣東西都是按照使用量計費，所以如果你的系統使用量很大，那麼維運成本也會提高。在錢的考量下，你可以選擇在地端以 Kubernetes 部署系統。
+
+Kubernetes 是一個開源的容器管理平台，它可以自動化地部署、擴展和管理容器化的應用程式。當你在地端運行自己的 Kubernetes 主機，你的金錢成本就只有主機的維運成本，而不是按照使用量計費的雲端服務。但是，你需要自己管理 Kubernetes 主機，自己設定資料庫、物件儲存體、共用磁碟區，這要求維運人員具有相當的技術能力。此外，你也需要自己處理網路路由、防火牆、安全性等等。這些都是雲端服務提供商幫你做好的，但在地端你需要自己做。如果你有足夠的技術能力，那麼在地端部署系統是一個不錯的選擇。
+
+Recorder.moe 在核心設計即考慮到雲端和地端運行，你一定能依照個人需求，在成本、規模和可靠度之間取得平衡。
+
+## 雲端部署
+
+import CloudProjectInfrastructureDiagram from './_Cloud-Project-Infrastructure-Diagram.md';
+
+<CloudProjectInfrastructureDiagram />
+<p style={{ textAlign: 'center' }}>這是我們推薦的雲端部署架構圖</p>
+
+|              | 基礎設施                 |
+| ------------ | ------------------------ |
+| 監控服務     | DigitalOcean Droplet     |
+| 網頁前端     | Azure Static Web Apps    |
+| 網頁後端     | Azure Functions          |
+| 資料庫       | Azure Cosmos DB          |
+| 物件儲存體   | Azure Blob Storage       |
+| 容器執行平台 | Azure Container Instance |
+| 共用磁碟區   | Azure Files              |
+
+- DigitalOcean Droplet 是高 CP 值的虛擬主機服務，推薦租用 $6 美元的主機方案來運行監控服務。<br />
+  <https://www.digitalocean.com/products/droplets/>
+- Azure Static Web Apps 的免費方案每月有 100 GB 的傳輸量，免費 SSL 憑證，可自訂網域。<br />
+  <https://azure.microsoft.com/zh-tw/pricing/details/app-service/static/>
+- Azure Functions 免費授權每個月一百萬次請求，400000 GB-s 執行時間，本專案的使用量不太可能超過此額度。<br />
+  <https://azure.microsoft.com/zh-tw/pricing/details/functions/>
+- Azure Cosmos DB 免費層包含 1000 RU/s，大約在監控 6 個頻道時不會超過，超過的部份按照用量計價。<br />
+  <https://learn.microsoft.com/zh-tw/azure/cosmos-db/free-tier>
+
+
+## 地端部署
+
+ import OnPremiseProjectInfrastructureDiagram from './_On-Premise-Project-Infrastructure-Diagram.md';
+
+<OnPremiseProjectInfrastructureDiagram/>
+
+
+|              | 基礎設施                 |
+| ------------ | ------------------------ |
+| 監控服務     | Kubernetes     |
+| 網頁前端     | Kubernetes    |
+| 網頁後端     | Kubernetes          |
+| 資料庫       | Apache Couch DB          |
+| 物件儲存體   | MinIO (Amazon S3-Compatible Storage)       |
+| 容器執行平台 | Kubernetes |
+| 共用磁碟區   | Kubernetes Persistent Volume              |

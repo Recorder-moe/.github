@@ -5,7 +5,6 @@ E[Azure Cosmos DB]
 end
 
 subgraph Discord
-X(Customer Service)
 Y(Webhook Notifier)
 end
 subgraph DigitalOcean Droplet
@@ -20,11 +19,10 @@ end
 subgraph Azure Compute
 subgraph Azure Container Instances
 G[Docker Container]
+K[azure-uploader]
 end
 
 subgraph Azure Functions
-K[AzureFileShares2BlobContainers]
-
 C[Backend] 
 end
 end
