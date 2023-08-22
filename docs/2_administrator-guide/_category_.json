@@ -1,0 +1,7 @@
+{
+  "label": "Administrator Guide",
+  "link": {
+    "type": "generated-index",
+    "description": "A guide for administrators for deploying and managing Recorder.moe"
+  }
+}

@@ -29,8 +29,8 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'zh-Hant'],
+    defaultLocale: 'zh-Hant',
+    locales: ['zh-Hant'],
   },
 
   presets: [
@@ -53,7 +53,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
+      metadata: [{name: 'keywords', content: 'Recorder.moe, recorder, recording, youtube-downloader, youtube-dl, yt-dlp, youtube, twitcasting, twitch, fc2'}],
       image: 'img/preview.webp',
       navbar: {
         title: 'Recorder.moe Docs',
@@ -63,10 +63,9 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Tutorial',
+            href: 'https://demo.recorder.moe',
+            label: 'Demo site',
+            position: 'right',
           },
           {
             href: 'https://github.com/Recorder-moe',
@@ -78,11 +77,23 @@ const config = {
       footer: {
         style: 'dark',
         links: [],
-        copyright: `Made with love by Recorder.moe. Built with <a href="https://docusaurus.io" target="_black">Docusaurus</a>`,
+        copyright: `Made with ❤ by Recorder.moe. Built with <a href="https://docusaurus.io" target="_black">Docusaurus</a>`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: darkCodeTheme,
+        darkTheme: lightCodeTheme,
+      },
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
+      },
+      announcementBar: {
+        id: 'dev',
+        content: 'This document is still being written.',
+        backgroundColor: '#242526',
+        textColor: '#c69026',
+        isCloseable: false,
       },
     }),
 };
