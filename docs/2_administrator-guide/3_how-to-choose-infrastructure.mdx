@@ -5,6 +5,14 @@ date: 2023-08-22T14:58:53.948Z
 draft: false
 ---
 
+:::tip
+
+Recorder.moe 需要一個容器執行平台以動態的部署錄影容器，目前我們支援的容器執行平台有 Azure Container Instance 和 Kubernetes。<br />
+所謂的地端部署，指的是在地端建立 Kubernetes 叢集，並在叢集上部署 Recorder.moe 系統。<br />
+當然，你完全可以將此 Kubernetes 叢集部署在雲端，Kubernetes 的廣泛支援性使得 Recorder.moe 的基礎設施選擇更有彈性。
+
+:::
+
 首先，你需要先決定你希望系統在哪裡運行。您可以選擇在 Azure 雲端或在 Kubernetes 部署。
 
 我們選擇微軟 Azure 雲端服務做為雲端基礎架構的服務提供商，因為它提供高度彈性的雲端運算服務和平台即服務，可以有效降低維運成本。此外，Azure 提供了高度可用性，可靠性和安全性，這是地端部署時無法提供的。例如說我們的網頁後端使用 Azure Functions，其免費授權每個月一百萬次請求，400000 GB-s 執行時間，基本上你不用為網頁後端的運算成本擔心。我們的錄影容器動態部署在 Azure Container Instance，不管同時錄製多少個頻道都沒問題。資料庫選用 Azure Cosmos DB，在世界各地都具有即時且無限的彈性、可以快速讀取和寫入資料，特別的是它可以直接從網頁前端訪問資料庫，而不需要經過網頁後端，這大大的降低了網頁讀取延遲和後端維運成本。
@@ -41,20 +49,21 @@ import CloudProjectInfrastructureDiagram from './_Cloud-Project-Infrastructure-D
 - Azure Cosmos DB 免費層包含 1000 RU/s，大約在監控 6 個頻道時不會超過，超過的部份按照用量計價。<br />
   <https://learn.microsoft.com/zh-tw/azure/cosmos-db/free-tier>
 
-
 ## 地端部署
 
- import OnPremiseProjectInfrastructureDiagram from './_On-Premise-Project-Infrastructure-Diagram.md';
 
-<OnPremiseProjectInfrastructureDiagram/>
+> 圖待補
 
+ import OnPremiseProjectInfrastructureDiagram from './\_On-Premise-Project-Infrastructure-Diagram.md';
 
-|              | 基礎設施                 |
-| ------------ | ------------------------ |
-| 監控服務     | Kubernetes     |
-| 網頁前端     | Kubernetes    |
-| 網頁後端     | Kubernetes          |
-| 資料庫       | Apache Couch DB          |
-| 物件儲存體   | MinIO (Amazon S3-Compatible Storage)       |
-| 容器執行平台 | Kubernetes |
-| 共用磁碟區   | Kubernetes Persistent Volume              |
+<OnPremiseProjectInfrastructureDiagram />
+
+|              | 基礎設施                             |
+| ------------ | ------------------------------------ |
+| 監控服務     | Kubernetes                           |
+| 網頁前端     | Kubernetes                           |
+| 網頁後端     | Kubernetes                           |
+| 資料庫       | Apache Couch DB                      |
+| 物件儲存體   | MinIO (Amazon S3-Compatible Storage) |
+| 容器執行平台 | Kubernetes                           |
+| 共用磁碟區   | Kubernetes Persistent Volume         |
