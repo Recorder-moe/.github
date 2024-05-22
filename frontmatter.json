@@ -58,8 +58,13 @@
       "path": "[[workspace]]/docs"
     },
     {
-      "path": "[[workspace]]/docs/3_user-guide"
+      "path": "[[workspace]]/docs/3_user-guide",
+      "title": "3_user-guide"
+    },
+    {
+      "title": "5_Storage",
+      "path": "[[workspace]]/docs/2_administrator-guide/5_Storage"
     }
   ],
-  "frontMatter.dashboard.openOnStart": false
+  "frontMatter.dashboard.openOnStart": true
 }
